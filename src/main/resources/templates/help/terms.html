@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Điều khoản & Quy định')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container py-4" style="max-width: 860px;">
+    <div th:replace="~{fragments/layout :: alerts}"></div>
+    
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small bg-white p-2 px-3 rounded-pill border shadow-sm d-inline-flex mb-0">
+            <li class="breadcrumb-item"><a th:href="@{/}" class="text-decoration-none text-muted"><i class="bi bi-house-door me-1"></i>Trang chủ</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/help}" class="text-decoration-none text-muted">Hỗ trợ</a></li>
+            <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">Điều khoản &amp; Quy định</li>
+        </ol>
+    </nav>
+
+    <div class="bg-white p-4 p-md-5 rounded-4 border shadow-sm mb-4">
+        <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+            <div class="bg-primary-subtle text-primary p-3 rounded-3 fs-3">
+                <i class="bi bi-file-earmark-ruled"></i>
+            </div>
+            <div>
+                <h3 class="fw-bold text-dark mb-1">Điều Khoản &amp; Quy Định Sử Dụng</h3>
+                <div class="text-muted small">Cập nhật lần cuối: Tháng 10/2026 · Hệ thống eShop Promax</div>
+            </div>
+        </div>
+
+        <div class="lh-lg text-secondary">
+            <h5 class="fw-bold text-dark mt-4 mb-2">1. Quy định chung và phạm vi áp dụng</h5>
+            <p>
+                Chào mừng bạn đến với hệ thống <strong>eShop</strong> (Đồ án xây dựng bởi sinh viên <strong>Vũ Trần Đức Nghĩa</strong> - MSSV: <code>23637711</code>). Khi truy cập, đặt hàng hoặc sử dụng bất kỳ dịch vụ nào trên website, bạn đồng ý tuân thủ toàn bộ các điều khoản và quy định được nêu tại đây.
+            </p>
+
+            <h5 class="fw-bold text-dark mt-4 mb-2">2. Đặt hàng và xác nhận giao dịch</h5>
+            <p>
+                Khách hàng lựa chọn sản phẩm, số lượng và cung cấp thông tin giao nhận chính xác. Khi đơn hàng được gửi thành công, hệ thống sẽ tự động cập nhật trừ số lượng tồn kho và lưu trữ trạng thái đơn hàng trong cơ sở dữ liệu để phục vụ việc xử lý và giao hàng nhanh chóng.
+            </p>
+
+            <h5 class="fw-bold text-dark mt-4 mb-2">3. Chính sách giá cả và thanh toán</h5>
+            <p>
+                Tất cả giá niêm yết trên eShop đều là Việt Nam Đồng (₫) và đã bao gồm thuế VAT theo quy định. Hệ thống hỗ trợ 2 hình thức thanh toán chính: Thanh toán khi nhận hàng (COD) và Chuyển khoản ngân hàng trực tuyến (Banking) có cơ chế xác nhận tự động.
+            </p>
+
+            <h5 class="fw-bold text-dark mt-4 mb-2">4. Chính sách đổi trả và hoàn tiền</h5>
+            <p>
+                Khách hàng được quyền kiểm tra sản phẩm trước khi nhận hàng. Đối với các sản phẩm lỗi kỹ thuật hoặc hư hại do vận chuyển, chúng tôi cam kết hỗ trợ đổi trả miễn phí trong vòng 7 ngày làm việc kể từ thời điểm nhận hàng.
+            </p>
+
+            <h5 class="fw-bold text-dark mt-4 mb-2">5. Bảo mật thông tin người dùng</h5>
+            <p>
+                Chúng tôi tôn trọng quyền riêng tư của bạn. Toàn bộ thông tin cá nhân và mật khẩu đăng nhập đều được mã hóa bằng thuật toán BCrypt một chiều an toàn, cam kết không chia sẻ cho bên thứ ba ngoại trừ mục đích phục vụ vận chuyển đơn hàng.
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center pt-4 mt-4 border-top">
+            <a th:href="@{/help}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                <i class="bi bi-arrow-left me-2"></i> Trung tâm trợ giúp
+            </a>
+            <a th:href="@{/products}" class="btn btn-primary d-inline-flex align-items-center">
+                <i class="bi bi-bag-check me-2"></i> Tiếp tục mua sắm
+            </a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

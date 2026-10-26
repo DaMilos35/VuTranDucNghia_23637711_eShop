@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Trung tâm trợ giúp')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container py-4">
+    <div th:replace="~{fragments/layout :: alerts}"></div>
+
+    <!-- Hero Banner (Chính xác theo thiết kế hình ảnh số 2) -->
+    <div class="help-hero-banner mb-5 text-center">
+        <div class="help-hero-subtitle">HỖ TRỢ KHÁCH HÀNG</div>
+        <h1 class="help-hero-title">Trung tâm trợ giúp</h1>
+        <p class="help-hero-desc">
+            Tìm câu trả lời về đặt vé, thanh toán trực tuyến, chính sách hoàn hủy và công nghệ AI.
+        </p>
+        
+        <!-- Live Search Box -->
+        <div class="help-search-container">
+            <i class="bi bi-search help-search-icon"></i>
+            <input type="text" id="faqSearchInput" class="form-control help-search-input"
+                   placeholder="Bạn cần tìm thông tin gì?"
+                   onkeyup="filterFaqs()">
+        </div>
+    </div>
+
+    <!-- Category Filter Pills (Chính xác theo thiết kế hình ảnh số 1) -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="faqTabs">
+        <button type="button" class="faq-pill active" onclick="setFaqCategory('all', this)">Tất cả</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('dat-tour', this)">Đặt tour</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('thanh-toan', this)">Thanh toán</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('don-dat', this)">Đơn đặt</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('ai-search', this)">Tìm kiếm AI</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('thong-tin', this)">Thông tin tour</button>
+        <button type="button" class="faq-pill" onclick="setFaqCategory('tai-khoan', this)">Tài khoản</button>
+    </div>
+
+    <!-- Accordion FAQ List (Chính xác theo thiết kế hình ảnh số 1) -->
+    <div class="help-accordion-wrapper" id="faqAccordionContainer">
+        
+        <!-- FAQ Item 1 (Đang mở như trong hình 1) -->
+        <div class="help-accordion-item" data-category="dat-tour">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Đặt tour</span>
+                <span class="faq-question">Làm thế nào để đặt vé và giữ chỗ tour?</span>
+                <i class="bi bi-chevron-up faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body show">
+                <p class="mb-0">
+                    Bạn chọn tour mong muốn, chọn số lượng hành khách rồi tiến hành Đặt ngay hoặc Thêm vào giỏ hàng. Tại trang Đặt tour, hệ thống hỗ trợ tự động điền (1-click autofill) hồ sơ tài khoản và đếm ngược giữ chỗ 15 phút an toàn.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="help-accordion-item" data-category="dat-tour">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Đặt tour</span>
+                <span class="faq-question">Chính sách ưu đãi dành cho đoàn hoặc doanh nghiệp B2B như thế nào?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Đối với khách đoàn từ 5 người trở lên hoặc đối tác doanh nghiệp B2B, hệ thống tự động áp dụng chính sách chiết khấu 10% - 25% trực tiếp vào hóa đơn và hỗ trợ xuất hóa đơn VAT điện tử nhanh chóng.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="help-accordion-item" data-category="thanh-toan">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Thanh toán</span>
+                <span class="faq-question">Hệ thống hỗ trợ những phương thức thanh toán trực tuyến nào?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Hệ thống eShop / TourBooking hỗ trợ đầy đủ các phương thức thanh toán linh hoạt: Thanh toán khi nhận hàng (COD), Chuyển khoản ngân hàng 24/7 tự động đối soát xác nhận (giả lập / VietQR), thẻ tín dụng quốc tế Visa/Mastercard và các ví điện tử bảo mật cao.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="help-accordion-item" data-category="don-dat">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Đơn đặt</span>
+                <span class="faq-question">Chính sách đổi hủy tour và quy trình nhận tiền hoàn như thế nào?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Bạn có thể quản lý hoặc yêu cầu đổi hủy đơn hàng/tour trong mục Quản lý đơn. Hệ thống hoàn tiền 100% khi yêu cầu trước thời hạn quy định (tối thiểu 48 giờ) và tiền hoàn sẽ được chuyển về tài khoản ban đầu trong 1-3 ngày làm việc theo đúng quy định hoàn hủy.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="help-accordion-item" data-category="ai-search">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Tìm kiếm AI</span>
+                <span class="faq-question">Tính năng tìm kiếm thông minh và gợi ý AI hoạt động như thế nào?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Hệ thống tích hợp thuật toán tìm kiếm thông minh không phân biệt hoa thường theo từ khóa, lọc danh mục thời gian thực và tự động đề xuất sản phẩm / tour phù hợp nhất với nhu cầu và ngân sách của bạn.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="help-accordion-item" data-category="thong-tin">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Thông tin tour</span>
+                <span class="faq-question">Làm sao để biết sản phẩm hoặc tour còn chỗ/còn hàng không?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Mỗi sản phẩm/tour đều hiển thị số lượng tồn kho và tình trạng trực tiếp theo thời gian thực (Còn hàng, Sắp hết hoặc Hết hàng) được đồng bộ tức thì với cơ sở dữ liệu MariaDB.
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div class="help-accordion-item" data-category="tai-khoan">
+            <div class="help-accordion-header" onclick="toggleFaq(this)">
+                <span class="faq-cat-label">Tài khoản</span>
+                <span class="faq-question">Làm thế nào để đăng ký và bảo mật tài khoản cá nhân?</span>
+                <i class="bi bi-chevron-down faq-chevron"></i>
+            </div>
+            <div class="help-accordion-body">
+                <p class="mb-0">
+                    Bạn có thể đăng ký tài khoản với tên đăng nhập và email duy nhất. Toàn bộ mật khẩu đều được băm bảo mật BCrypt với muối ngẫu nhiên (salt) chống giải mã theo tiêu chuẩn bảo mật Spring Security 6.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Contact support box -->
+    <div class="mt-5 p-4 rounded-4 bg-white border text-center shadow-sm" style="max-width: 650px; margin: 0 auto;">
+        <h5 class="fw-bold text-dark mb-2">Bạn vẫn chưa tìm được câu trả lời?</h5>
+        <p class="text-muted small mb-3">Đội ngũ hỗ trợ khách hàng của chúng tôi luôn sẵn sàng giải đáp 24/7.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="tel:19006868" class="btn btn-primary d-inline-flex align-items-center">
+                <i class="bi bi-telephone me-2"></i> Gọi 1900 6868
+            </a>
+            <a th:href="@{/products}" class="btn btn-outline-secondary d-inline-flex align-items-center">
+                <i class="bi bi-shop me-2"></i> Mua sắm sản phẩm
+            </a>
+        </div>
+    </div>
+</main>
+
+<script>
+    let currentCategory = 'all';
+
+    function setFaqCategory(category, btnElement) {
+        currentCategory = category;
+        document.querySelectorAll('#faqTabs .faq-pill').forEach(btn => btn.classList.remove('active'));
+        if (btnElement) btnElement.classList.add('active');
+        filterFaqs();
+    }
+
+    function toggleFaq(headerElement) {
+        const item = headerElement.closest('.help-accordion-item');
+        const body = item.querySelector('.help-accordion-body');
+        const chevron = item.querySelector('.faq-chevron');
+        
+        const isShow = body.classList.contains('show');
+        if (isShow) {
+            body.classList.remove('show');
+            chevron.classList.remove('bi-chevron-up');
+            chevron.classList.add('bi-chevron-down');
+        } else {
+            body.classList.add('show');
+            chevron.classList.remove('bi-chevron-down');
+            chevron.classList.add('bi-chevron-up');
+        }
+    }
+
+    function filterFaqs() {
+        const query = (document.getElementById('faqSearchInput').value || '').toLowerCase().trim();
+        const items = document.querySelectorAll('.help-accordion-item');
+
+        items.forEach(item => {
+            const itemCat = item.getAttribute('data-category');
+            const questionText = (item.querySelector('.faq-question').innerText || '').toLowerCase();
+            const bodyText = (item.querySelector('.help-accordion-body').innerText || '').toLowerCase();
+
+            const matchCategory = (currentCategory === 'all' || itemCat === currentCategory);
+            const matchQuery = (query === '' || questionText.includes(query) || bodyText.includes(query));
+
+            if (matchCategory && matchQuery) {
+                item.style.display = 'block';
+                if (query !== '') {
+                    // Tự động mở khi tìm kiếm
+                    item.querySelector('.help-accordion-body').classList.add('show');
+                    const chevron = item.querySelector('.faq-chevron');
+                    chevron.classList.remove('bi-chevron-down');
+                    chevron.classList.add('bi-chevron-up');
+                }
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Kiểm tra tham số URL ?tab=... nếu có
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab');
+        if (tab) {
+            const btn = Array.from(document.querySelectorAll('#faqTabs .faq-pill'))
+                .find(b => b.getAttribute('onclick').includes(tab));
+            if (btn) {
+                btn.click();
+            }
+        }
+    });
+</script>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+</body>
+</html>

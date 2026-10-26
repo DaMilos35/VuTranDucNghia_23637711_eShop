@@ -13,6 +13,7 @@
     --color-slate-700: #334155;
     --color-slate-600: #475569;
     --color-slate-500: #64748b;
+    --color-slate-400: #94a3b8;
     --color-slate-200: #e2e8f0;
     --color-slate-100: #f1f5f9;
     --color-slate-50: #f8fafc;
@@ -23,6 +24,7 @@
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
+    --radius-xl: 24px;
 }
 
 body {
@@ -46,7 +48,7 @@ main.container {
     background: var(--color-slate-900);
     color: #94a3b8;
     font-size: 0.813rem;
-    padding: 0.4rem 0;
+    padding: 0.45rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -65,14 +67,14 @@ main.container {
     color: #ffffff;
     font-weight: 600;
     font-size: 0.75rem;
-    padding: 3px 10px;
+    padding: 3px 12px;
     border-radius: 9999px;
     letter-spacing: 0.02em;
 }
 
 .navbar-promax {
     background: #ffffff;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
     border-bottom: 1px solid var(--color-slate-200);
     position: sticky;
     top: 0;
@@ -117,7 +119,7 @@ main.container {
 
 .nav-link-promax {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.938rem;
     color: var(--color-slate-700) !important;
     padding: 0.55rem 0.95rem !important;
     border-radius: var(--radius-sm);
@@ -187,7 +189,7 @@ main.container {
 }
 
 /* =====================================================================
-   HERO BANNER
+   HERO BANNER (STORE)
    ===================================================================== */
 .hero-promax {
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #1e3a8a 100%);
@@ -196,7 +198,7 @@ main.container {
     color: #ffffff;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2);
     margin-bottom: 2rem;
 }
 
@@ -212,7 +214,7 @@ main.container {
 }
 
 .hero-title {
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.25;
@@ -221,8 +223,178 @@ main.container {
 .hero-desc {
     color: #cbd5e1;
     font-size: 1rem;
-    max-width: 600px;
+    max-width: 620px;
     margin-bottom: 1.5rem;
+}
+
+/* =====================================================================
+   HELP CENTER HERO & ACCORDION (THEO HÌNH ẢNH 1 VÀ 2)
+   ===================================================================== */
+.help-hero-banner {
+    background: linear-gradient(100deg, #f3f4f6 0%, #e2e8f0 30%, #475569 80%, #1e293b 100%);
+    border-radius: var(--radius-xl);
+    padding: 3.5rem 2rem;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.help-hero-subtitle {
+    color: #2563eb;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.help-hero-title {
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+}
+
+.help-hero-desc {
+    color: #475569;
+    font-size: 1.05rem;
+    max-width: 650px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.help-search-container {
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.help-search-input {
+    border-radius: 9999px;
+    height: 52px;
+    padding-left: 50px;
+    padding-right: 20px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    font-size: 0.98rem;
+    color: #1e293b;
+    transition: all 0.2s ease;
+}
+
+.help-search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18);
+}
+
+.help-search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    font-size: 1.15rem;
+}
+
+/* Category Filter Pills (Hình 1) */
+.faq-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    padding: 8px 20px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.faq-pill:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+.faq-pill.active {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-color: #93c5fd;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+}
+
+/* Accordion Items (Hình 1) */
+.help-accordion-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.help-accordion-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-subtle);
+}
+
+.help-accordion-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: var(--shadow-card);
+}
+
+.help-accordion-header {
+    padding: 1.15rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    background: #ffffff;
+    transition: background 0.15s ease;
+}
+
+.help-accordion-header:hover {
+    background: #fafafa;
+}
+
+.faq-cat-label {
+    font-weight: 700;
+    color: #334155;
+    font-size: 0.95rem;
+    min-width: 120px;
+    text-align: left;
+}
+
+.faq-question {
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 0.98rem;
+    flex-grow: 1;
+    text-align: left;
+    margin: 0 1.25rem;
+    line-height: 1.4;
+}
+
+.faq-chevron {
+    font-size: 1.1rem;
+    color: #64748b;
+    transition: transform 0.2s ease;
+}
+
+.help-accordion-body {
+    padding: 0 1.5rem 1.35rem 1.5rem;
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    display: none;
+    border-top: 1px dashed #f1f5f9;
+}
+
+.help-accordion-body.show {
+    display: block;
 }
 
 /* =====================================================================
@@ -494,7 +666,7 @@ main.container {
 }
 
 /* =====================================================================
-   FOOTER PROMAX (THEO HÌNH ẢNH MẪU ĐƯỢC CUNG CẤP)
+   FOOTER PROMAX (CHÍNH XÁC THEO HÌNH ẢNH 3 ĐƯỢC CUNG CẤP)
    ===================================================================== */
 .footer-promax {
     background: #ffffff;
@@ -505,23 +677,23 @@ main.container {
 }
 
 .footer-heading {
-    color: var(--color-navy); /* Deep navy title exactly like the screenshot */
+    color: var(--color-navy); /* Chuẩn Navy đậm như trong hình */
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     position: relative;
     padding-bottom: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     letter-spacing: -0.01em;
 }
 
-/* Orange underline accent line from the image */
+/* Đường gạch cam chuẩn theo hình */
 .footer-heading::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 42px;
-    height: 3px;
+    width: 45px;
+    height: 3.5px;
     background: var(--color-accent-orange);
     border-radius: 2px;
 }
@@ -533,25 +705,25 @@ main.container {
 }
 
 .footer-list li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .footer-link {
     color: var(--color-slate-600);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
     transition: all 0.2s ease;
 }
 
-/* Orange chevron › exactly like in the user's uploaded image */
+/* Mũi tên chevron › chuẩn theo hình */
 .footer-arrow {
     color: var(--color-accent-orange);
     font-weight: 800;
-    font-size: 1.15rem;
-    margin-right: 10px;
+    font-size: 1.25rem;
+    margin-right: 12px;
     line-height: 1;
     display: inline-block;
     transition: transform 0.2s ease;
@@ -559,7 +731,7 @@ main.container {
 
 .footer-link:hover {
     color: var(--color-accent-orange);
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
 .footer-link:hover .footer-arrow {
@@ -568,7 +740,7 @@ main.container {
 
 .footer-brand-desc {
     color: var(--color-slate-500);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     line-height: 1.6;
     margin-bottom: 1.25rem;
 }
@@ -578,16 +750,16 @@ main.container {
     align-items: center;
     gap: 10px;
     color: var(--color-slate-600);
-    font-size: 0.88rem;
-    margin-bottom: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
 }
 
 .footer-bottom-bar {
     border-top: 1px solid var(--color-slate-200);
-    padding-top: 1.5rem;
+    padding-top: 1.75rem;
     margin-top: 3.5rem;
     color: var(--color-slate-500);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
 }
 
 /* Back to top button */
@@ -595,8 +767,8 @@ main.container {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: var(--color-primary);
     color: #ffffff;

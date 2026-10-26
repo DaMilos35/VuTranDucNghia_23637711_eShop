@@ -31,4 +31,17 @@ public class ShopController {
         model.addAttribute("product", productService.findById(id));
         return "shop/detail";
     }
+
+    @GetMapping("/help")
+    public String help(@RequestParam(required = false, defaultValue = "all") String tab, Model model) {
+        model.addAttribute("activeTab", tab);
+        model.addAttribute("categories", categoryService.findAll());
+        return "help/index";
+    }
+
+    @GetMapping("/terms")
+    public String terms(Model model) {
+        model.addAttribute("categories", categoryService.findAll());
+        return "help/terms";
+    }
 }
