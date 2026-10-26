@@ -20,8 +20,12 @@
         <div class="row g-5 align-items-center">
             <!-- Product Image -->
             <div class="col-lg-5 col-md-6">
-                <div class="detail-img-wrapper">
-                    <img class="img-fluid detail-img rounded"
+                <div class="detail-img-wrapper position-relative">
+                    <div class="d-flex gap-2 position-absolute top-0 start-0 m-3 z-2">
+                        <span class="badge bg-primary px-2 py-1"><i class="bi bi-image me-1"></i> Ảnh HD (6)</span>
+                        <span class="badge bg-dark bg-opacity-75 px-2 py-1"><i class="bi bi-camera-video me-1"></i> Video 4K</span>
+                    </div>
+                    <img class="img-fluid detail-img rounded shadow-sm"
                          th:src="${product.imageUrl}"
                          th:alt="${product.name}"
                          onerror="this.onerror=null; this.src='https://placehold.co/500x400?text=eShop+Product';">
@@ -30,8 +34,10 @@
 
             <!-- Product Info -->
             <div class="col-lg-7 col-md-6">
-                <div class="mb-2">
+                <div class="d-flex flex-wrap align-items-center gap-3 mb-2">
                     <span class="category-tag" th:text="${product.category.name}"></span>
+                    <span class="text-warning small fw-bold"><i class="bi bi-star-fill me-1"></i>4.9 / 5 (Đánh giá tuyệt hảo)</span>
+                    <span class="text-muted small"><i class="bi bi-truck text-primary me-1"></i>Giao nhanh toàn quốc</span>
                 </div>
                 
                 <h2 class="fw-bold text-dark mb-3" th:text="${product.name}"></h2>
@@ -55,6 +61,45 @@
                 <div class="mb-4">
                     <h6 class="text-uppercase text-muted fw-bold small mb-2">Đặc điểm nổi bật</h6>
                     <p class="text-secondary lh-lg mb-0" th:text="${product.description}"></p>
+                </div>
+
+                <!-- AI Smart Assistant Box (Theo thiết kế mẫu Hình ảnh số 2) -->
+                <div class="ai-smart-box">
+                    <div class="ai-smart-header">
+                        <div class="ai-smart-title">
+                            <i class="bi bi-magic text-success fs-5"></i>
+                            <span>AI Smart Assistant · Cá nhân hóa gợi ý theo đối tượng</span>
+                        </div>
+                        <span class="ai-badge">AI ASSISTANT</span>
+                    </div>
+                    <p class="text-muted small mb-3">Chọn phong cách hoặc nhu cầu của bạn để nhận lưu ý và mẹo tối ưu độc quyền:</p>
+                    
+                    <div class="d-flex flex-wrap gap-2 mb-2" id="aiPersonaGroup">
+                        <button type="button" class="ai-pill-btn" onclick="selectPersona(this, 'family')">
+                            <i class="bi bi-people-fill me-1"></i> Gia đình có trẻ nhỏ
+                        </button>
+                        <button type="button" class="ai-pill-btn" onclick="selectPersona(this, 'couple')">
+                            <i class="bi bi-heart-fill me-1"></i> Cặp đôi check-in
+                        </button>
+                        <button type="button" class="ai-pill-btn active" onclick="selectPersona(this, 'food')">
+                            <i class="bi bi-cup-hot-fill me-1"></i> Khám phá ẩm thực
+                        </button>
+                        <button type="button" class="ai-pill-btn" onclick="selectPersona(this, 'active')">
+                            <i class="bi bi-lightning-charge-fill me-1"></i> Năng động &amp; Trải nghiệm
+                        </button>
+                    </div>
+
+                    <div class="ai-note-box shadow-xs">
+                        <div class="d-flex align-items-start gap-2">
+                            <span class="fs-5">💡</span>
+                            <div>
+                                <strong class="text-dark small d-block mb-1" id="aiPersonaTitle">Ghi chú thông minh dành cho Khám phá ẩm thực:</strong>
+                                <p class="text-secondary small mb-0 lh-base" id="aiPersonaDesc">
+                                    Thưởng thức 100% tinh hoa đặc sản trứ danh địa phương tại các cơ sở lâu đời uy tín. Đội ngũ đồng hành thuyết minh nguồn gốc câu chuyện ẩm thực dân gian đặc sắc.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Ưu đãi kèm theo -->
@@ -84,6 +129,37 @@
         </div>
     </div>
 </main>
+
+<script>
+    const personaMap = {
+        'family': {
+            title: 'Ghi chú thông minh dành cho Gia đình có trẻ nhỏ:',
+            desc: 'Sản phẩm tiêu chuẩn cao, cấu hình an toàn, hỗ trợ bảo hành chính hãng và chính sách đổi mới 7 ngày nhanh gọn giúp gia đình an tâm sử dụng hàng ngày.'
+        },
+        'couple': {
+            title: 'Ghi chú thông minh dành cho Cặp đôi check-in:',
+            desc: 'Thiết kế sang trọng, màu sắc thanh lịch, camera và màn hình sắc nét giúp ghi lại mọi khoảnh khắc ngọt ngào với chất lượng điện ảnh đỉnh cao.'
+        },
+        'food': {
+            title: 'Ghi chú thông minh dành cho Khám phá ẩm thực:',
+            desc: 'Thưởng thức 100% tinh hoa đặc sản trứ danh địa phương tại các cơ sở lâu đời uy tín. Hướng dẫn viên thuyết minh nguồn gốc câu chuyện ẩm thực dân gian đặc sắc.'
+        },
+        'active': {
+            title: 'Ghi chú thông minh dành cho Năng động & Trải nghiệm:',
+            desc: 'Độ bền bỉ tối đa, khả năng chống nước và thời lượng pin vượt trội luôn sẵn sàng cùng bạn chinh phục mọi thử thách và hành trình khám phá mới.'
+        }
+    };
+
+    function selectPersona(btn, key) {
+        document.querySelectorAll('#aiPersonaGroup .ai-pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const data = personaMap[key];
+        if (data) {
+            document.getElementById('aiPersonaTitle').textContent = data.title;
+            document.getElementById('aiPersonaDesc').textContent = data.desc;
+        }
+    }
+</script>
 
 <footer th:replace="~{fragments/layout :: footer}"></footer>
 </body>

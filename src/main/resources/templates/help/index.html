@@ -7,7 +7,7 @@
 <main class="container py-4">
     <div th:replace="~{fragments/layout :: alerts}"></div>
 
-    <!-- Hero Banner (Chính xác theo thiết kế hình ảnh số 2) -->
+    <!-- Hero Banner (Chính xác theo thiết kế hình ảnh số 2, độ tương phản cao, 100% rõ chữ) -->
     <div class="help-hero-banner mb-5 text-center">
         <div class="help-hero-subtitle">HỖ TRỢ KHÁCH HÀNG</div>
         <h1 class="help-hero-title">Trung tâm trợ giúp</h1>
@@ -24,22 +24,37 @@
         </div>
     </div>
 
-    <!-- Category Filter Pills (Chính xác theo thiết kế hình ảnh số 1) -->
+    <!-- Category Filter Pills (Chính xác theo thiết kế hình ảnh số 1, liên kết chuẩn xác theo tab) -->
     <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" id="faqTabs">
-        <button type="button" class="faq-pill active" onclick="setFaqCategory('all', this)">Tất cả</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('dat-tour', this)">Đặt tour</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('thanh-toan', this)">Thanh toán</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('don-dat', this)">Đơn đặt</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('ai-search', this)">Tìm kiếm AI</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('thong-tin', this)">Thông tin tour</button>
-        <button type="button" class="faq-pill" onclick="setFaqCategory('tai-khoan', this)">Tài khoản</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'all' or activeTab == null or activeTab == ''} ? 'active' : ''"
+                onclick="setFaqCategory('all', this)">Tất cả</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'dat-tour'} ? 'active' : ''"
+                onclick="setFaqCategory('dat-tour', this)">Đặt tour</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'thanh-toan'} ? 'active' : ''"
+                onclick="setFaqCategory('thanh-toan', this)">Thanh toán</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'don-dat'} ? 'active' : ''"
+                onclick="setFaqCategory('don-dat', this)">Đơn đặt</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'ai-search'} ? 'active' : ''"
+                onclick="setFaqCategory('ai-search', this)">Tìm kiếm AI</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'thong-tin'} ? 'active' : ''"
+                onclick="setFaqCategory('thong-tin', this)">Thông tin tour</button>
+        <button type="button" class="faq-pill"
+                th:classappend="${activeTab == 'tai-khoan'} ? 'active' : ''"
+                onclick="setFaqCategory('tai-khoan', this)">Tài khoản</button>
     </div>
 
     <!-- Accordion FAQ List (Chính xác theo thiết kế hình ảnh số 1) -->
     <div class="help-accordion-wrapper" id="faqAccordionContainer">
         
-        <!-- FAQ Item 1 (Đang mở như trong hình 1) -->
-        <div class="help-accordion-item" data-category="dat-tour">
+        <!-- FAQ Item 1 (Đang mở theo hình mẫu khi ở tab Đặt tour hoặc Tất cả) -->
+        <div class="help-accordion-item" data-category="dat-tour"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'dat-tour'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Đặt tour</span>
                 <span class="faq-question">Làm thế nào để đặt vé và giữ chỗ tour?</span>
@@ -53,7 +68,8 @@
         </div>
 
         <!-- FAQ Item 2 -->
-        <div class="help-accordion-item" data-category="dat-tour">
+        <div class="help-accordion-item" data-category="dat-tour"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'dat-tour'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Đặt tour</span>
                 <span class="faq-question">Chính sách ưu đãi dành cho đoàn hoặc doanh nghiệp B2B như thế nào?</span>
@@ -67,7 +83,8 @@
         </div>
 
         <!-- FAQ Item 3 -->
-        <div class="help-accordion-item" data-category="thanh-toan">
+        <div class="help-accordion-item" data-category="thanh-toan"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'thanh-toan'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Thanh toán</span>
                 <span class="faq-question">Hệ thống hỗ trợ những phương thức thanh toán trực tuyến nào?</span>
@@ -81,7 +98,8 @@
         </div>
 
         <!-- FAQ Item 4 -->
-        <div class="help-accordion-item" data-category="don-dat">
+        <div class="help-accordion-item" data-category="don-dat"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'don-dat'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Đơn đặt</span>
                 <span class="faq-question">Chính sách đổi hủy tour và quy trình nhận tiền hoàn như thế nào?</span>
@@ -95,7 +113,8 @@
         </div>
 
         <!-- FAQ Item 5 -->
-        <div class="help-accordion-item" data-category="ai-search">
+        <div class="help-accordion-item" data-category="ai-search"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'ai-search'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Tìm kiếm AI</span>
                 <span class="faq-question">Tính năng tìm kiếm thông minh và gợi ý AI hoạt động như thế nào?</span>
@@ -109,7 +128,8 @@
         </div>
 
         <!-- FAQ Item 6 -->
-        <div class="help-accordion-item" data-category="thong-tin">
+        <div class="help-accordion-item" data-category="thong-tin"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'thong-tin'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Thông tin tour</span>
                 <span class="faq-question">Làm sao để biết sản phẩm hoặc tour còn chỗ/còn hàng không?</span>
@@ -123,7 +143,8 @@
         </div>
 
         <!-- FAQ Item 7 -->
-        <div class="help-accordion-item" data-category="tai-khoan">
+        <div class="help-accordion-item" data-category="tai-khoan"
+             th:style="${activeTab != 'all' and activeTab != null and activeTab != '' and activeTab != 'tai-khoan'} ? 'display: none;' : 'display: block;'">
             <div class="help-accordion-header" onclick="toggleFaq(this)">
                 <span class="faq-cat-label">Tài khoản</span>
                 <span class="faq-question">Làm thế nào để đăng ký và bảo mật tài khoản cá nhân?</span>
@@ -153,13 +174,27 @@
     </div>
 </main>
 
-<script>
-    let currentCategory = 'all';
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let currentCategory = /*[[${activeTab}]]*/ 'all';
+    if (!currentCategory || currentCategory === '') currentCategory = 'all';
 
     function setFaqCategory(category, btnElement) {
         currentCategory = category;
         document.querySelectorAll('#faqTabs .faq-pill').forEach(btn => btn.classList.remove('active'));
-        if (btnElement) btnElement.classList.add('active');
+        if (btnElement) {
+            btnElement.classList.add('active');
+        }
+        
+        // Cập nhật URL tham số ?tab= mà không tải lại trang
+        const url = new URL(window.location);
+        if (category === 'all') {
+            url.searchParams.delete('tab');
+        } else {
+            url.searchParams.set('tab', category);
+        }
+        window.history.replaceState({}, '', url);
+
         filterFaqs();
     }
 
@@ -195,7 +230,6 @@
             if (matchCategory && matchQuery) {
                 item.style.display = 'block';
                 if (query !== '') {
-                    // Tự động mở khi tìm kiếm
                     item.querySelector('.help-accordion-body').classList.add('show');
                     const chevron = item.querySelector('.faq-chevron');
                     chevron.classList.remove('bi-chevron-down');
@@ -207,18 +241,16 @@
         });
     }
 
-    // Kiểm tra tham số URL ?tab=... nếu có
     document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tab = urlParams.get('tab');
-        if (tab) {
-            const btn = Array.from(document.querySelectorAll('#faqTabs .faq-pill'))
-                .find(b => b.getAttribute('onclick').includes(tab));
-            if (btn) {
-                btn.click();
+        if (currentCategory && currentCategory !== 'all') {
+            const tabsContainer = document.getElementById('faqTabs');
+            if (tabsContainer) {
+                tabsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
+        filterFaqs();
     });
+    /*]]>*/
 </script>
 
 <footer th:replace="~{fragments/layout :: footer}"></footer>

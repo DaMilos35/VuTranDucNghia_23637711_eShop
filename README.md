@@ -53,12 +53,13 @@ Dự án **eShop Promax** là ứng dụng thương mại điện tử chuyên n
   - **Phân trang chuẩn mực**: 12 sản phẩm/trang, hỗ trợ nút trang trước/sau và đánh số trang.
 * **Trang chi tiết sản phẩm (`/products/{id}`)**:
   - Thanh điều hướng phân cấp (Breadcrumbs): `Trang chủ` › `Danh mục` › `Tên sản phẩm`.
-  - Khung ảnh sản phẩm lớn chất lượng cao.
-  - Khối thông tin chi tiết: Tình trạng tồn kho, mô tả kỹ thuật, chính sách bảo hành 12 tháng, giao hàng hoả tốc.
+  - Khung ảnh sản phẩm lớn chất lượng cao kèm huy hiệu media `Ảnh HD (6)` và `Video 4K`.
+  - Khối thông tin chi tiết: Đánh giá sao `★ 4.9/5`, tình trạng tồn kho, mô tả kỹ thuật, chính sách bảo hành 12 tháng, giao hàng hoả tốc.
+  - **Trợ lý thông minh AI (AI Smart Assistant Tailor)**: Phân tích và gợi ý ghi chú độc quyền theo đối tượng người dùng (`Gia đình có trẻ nhỏ`, `Cặp đôi check-in`, `Khám phá ẩm thực`, `Năng động & Trải nghiệm`) với chuyển đổi nội dung tương tác tức thì.
 
 ### 3. Trung Tâm Trợ Giúp & FAQ Promax (`/help`)
-* **Banner Hero kim loại cao cấp**: Chuyển sắc từ xám bạc sang than đậm đúng theo mẫu thiết kế.
-* **Bộ lọc danh mục dạng viên thuốc (Filter Pills)**: 7 nhóm chủ đề (`Tất cả`, `Đặt tour`, `Thanh toán`, `Đơn đặt`, `Tìm kiếm AI`, `Thông tin tour`, `Tài khoản`) với hiệu ứng highlight xanh lam tinh tế.
+* **Banner Hero kim loại cao cấp**: Nền gradient Slate thẫm tương phản cao với chữ trắng tinh khiết (`#ffffff`), phụ đề xanh ngọc (`#38bdf8`) và mô tả sáng rõ đạt chuẩn công thái học thị giác WCAG AAA.
+* **Bộ lọc danh mục dạng viên thuốc (Filter Pills)**: 7 nhóm chủ đề (`Tất cả`, `Đặt tour`, `Thanh toán`, `Đơn đặt`, `Tìm kiếm AI`, `Thông tin tour`, `Tài khoản`) với hiệu ứng highlight xanh lam tinh tế. Hỗ trợ kích hoạt tự động theo tham số URL (ví dụ: `/help?tab=dat-tour` tự động làm sáng nút Đặt tour và cuộn mượt vào vùng FAQ).
 * **Hộp Accordion hỏi đáp tương tác**:
   - Chức năng tìm kiếm trực tiếp (Live Search) tự động mở rộng và lọc câu hỏi khớp với từ khoá.
   - Câu trả lời chi tiết về hướng dẫn đặt hàng/tour, thanh toán trực tuyến, hoàn hủy và mã hoá bảo mật.
