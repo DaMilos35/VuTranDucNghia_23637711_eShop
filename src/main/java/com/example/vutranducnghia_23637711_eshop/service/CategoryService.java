@@ -30,6 +30,9 @@ public class CategoryService {
     }
 
     public void delete(Long id) {
+        if (!categoryRepository.existsById(id)) {
+            throw new NotFoundException("Không tìm thấy danh mục id = " + id);
+        }
         if (productRepository.existsByCategoryId(id)) {
             throw new IllegalStateException("Danh mục đang có sản phẩm, không thể xoá");
         }

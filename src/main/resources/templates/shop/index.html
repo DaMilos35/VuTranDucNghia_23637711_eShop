@@ -3,61 +3,166 @@
 <head th:replace="~{fragments/layout :: head('Cửa hàng')}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
-<main class="container">
+
+<main class="container py-3">
     <div th:replace="~{fragments/layout :: alerts}"></div>
-    <div class="row">
-        <!-- Cột danh mục -->
-        <aside class="col-md-3 mb-3">
-            <div class="list-group">
+
+    <!-- Hero Banner Promax -->
+    <div class="hero-promax">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-white text-primary fw-bold px-3 py-2 rounded-pill mb-3">
+                    <i class="bi bi-stars text-warning me-1"></i> Ưu đãi công nghệ đỉnh cao 2026
+                </span>
+                <h1 class="hero-title mb-3">Trải Nghiệm Mua Sắm eShop Promax</h1>
+                <p class="hero-desc">
+                    Khám phá hàng loạt thiết bị điện thoại, laptop, phụ kiện chính hãng với mức giá hấp dẫn nhất. Giao hàng hoả tốc, bảo hành chuẩn mực.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <div class="d-flex align-items-center gap-2 text-white-50 small">
+                        <i class="bi bi-truck text-warning fs-5"></i>
+                        <span>Miễn phí giao hàng đơn từ 500k</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-white-50 small">
+                        <i class="bi bi-arrow-repeat text-warning fs-5"></i>
+                        <span>Đổi mới trong 7 ngày</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-white-50 small">
+                        <i class="bi bi-patch-check text-warning fs-5"></i>
+                        <span>100% chính hãng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Cột danh mục (Sidebar) -->
+        <aside class="col-lg-3 col-md-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-funnel-fill text-primary me-2 fs-5"></i>
+                <h5 class="fw-bold mb-0 text-dark">Danh mục sản phẩm</h5>
+            </div>
+            
+            <div class="list-group list-group-custom">
                 <a class="list-group-item list-group-item-action"
                    th:classappend="${categoryId == null} ? 'active'"
-                   th:href="@{/products(keyword=${keyword})}">Tất cả</a>
+                   th:href="@{/products(keyword=${keyword})}">
+                    <span><i class="bi bi-grid-fill me-2"></i> Tất cả danh mục</span>
+                    <i class="bi bi-chevron-right small opacity-75"></i>
+                </a>
                 <a th:each="c : ${categories}" class="list-group-item list-group-item-action"
                    th:classappend="${c.id == categoryId} ? 'active'"
-                   th:href="@{/products(categoryId=${c.id}, keyword=${keyword})}"
-                   th:text="${c.name}"></a>
+                   th:href="@{/products(categoryId=${c.id}, keyword=${keyword})}">
+                    <span th:text="${c.name}"></span>
+                    <i class="bi bi-chevron-right small opacity-75"></i>
+                </a>
             </div>
         </aside>
-        <!-- Lưới sản phẩm -->
-        <section class="col-md-9">
-            <p class="text-muted">
-                Tìm thấy <b th:text="${products.totalElements}">0</b> sản phẩm
-                <span th:if="${keyword}"> cho từ khoá "<b th:text="${keyword}"></b>"</span>
-            </p>
-            <div class="row row-cols-2 row-cols-lg-3 g-3">
+
+        <!-- Lưới sản phẩm (Main Grid) -->
+        <section class="col-lg-9 col-md-8">
+            <!-- Filter Toolbar -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center bg-white p-3 rounded-3 border mb-4 shadow-sm">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-boxes text-primary me-2 fs-5"></i>
+                    <span class="text-muted small">Tìm thấy:</span>
+                    <strong class="text-dark fs-6 ms-1" th:text="${products.totalElements}">0</strong>
+                    <span class="text-muted small ms-1">sản phẩm</span>
+                    <span th:if="${keyword}" class="ms-2">
+                        cho từ khoá <span class="badge bg-primary-subtle text-primary" th:text="'&quot;' + ${keyword} + '&quot;'"></span>
+                    </span>
+                </div>
+                
+                <div th:if="${keyword != null or categoryId != null}">
+                    <a th:href="@{/products}" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center">
+                        <i class="bi bi-x-circle me-1"></i> Xoá bộ lọc
+                    </a>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div th:if="${products.empty}" class="bg-white p-5 rounded-4 text-center border shadow-sm my-4">
+                <div class="mb-3 text-muted">
+                    <i class="bi bi-search fs-1 text-secondary opacity-50"></i>
+                </div>
+                <h5 class="fw-bold text-dark">Không tìm thấy sản phẩm nào</h5>
+                <p class="text-muted small">Vui lòng thử tìm kiếm với từ khoá khác hoặc chọn danh mục khác.</p>
+                <a th:href="@{/products}" class="btn btn-primary btn-sm mt-2">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Xem tất cả sản phẩm
+                </a>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" th:unless="${products.empty}">
                 <div class="col" th:each="p : ${products.content}">
-                    <div class="card h-100 shadow-sm">
-                        <a th:href="@{/products/{id}(id=${p.id})}">
-                            <img class="card-img-top product-img"
-                                 th:src="${p.imageUrl}" th:alt="${p.name}">
+                    <div class="card-product">
+                        <a th:href="@{/products/{id}(id=${p.id})}" class="product-img-wrapper text-decoration-none">
+                            <img class="product-img"
+                                 th:src="${p.imageUrl}"
+                                 th:alt="${p.name}"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=eShop+Product';">
                         </a>
-                        <div class="card-body d-flex flex-column">
-                            <small class="text-muted" th:text="${p.category.name}"></small>
-                            <h6 class="card-title" th:text="${p.name}"></h6>
-                            <div class="price mb-2"
-                                 th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')} + ' ₫'"></div>
-                            <div class="mt-auto">
+                        <div class="card-body">
+                            <div>
+                                <span class="category-tag" th:text="${p.category.name}"></span>
+                            </div>
+                            <h6 class="card-title">
+                                <a th:href="@{/products/{id}(id=${p.id})}" class="text-decoration-none text-dark" th:text="${p.name}"></a>
+                            </h6>
+                            
+                            <div class="d-flex align-items-center justify-content-between mb-3 mt-auto">
+                                <div class="price" th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')} + ' ₫'"></div>
+                                <span th:if="${p.quantity > 5}" class="badge-stock badge-in-stock">
+                                    <i class="bi bi-check2"></i> Còn hàng
+                                </span>
+                                <span th:if="${p.quantity > 0 and p.quantity <= 5}" class="badge-stock badge-low-stock" th:text="'Còn ' + ${p.quantity} + ' sp'"></span>
+                                <span th:if="${p.quantity == 0}" class="badge-stock badge-out-stock">
+                                    <i class="bi bi-x"></i> Hết hàng
+                                </span>
+                            </div>
+                            
+                            <div class="pt-2 border-top">
                                 <!-- Nút "Thêm vào giỏ" sẽ bổ sung ở Phần 2 -->
-                                <a class="btn btn-sm btn-outline-primary"
-                                   th:href="@{/products/{id}(id=${p.id})}">Chi tiết</a>
+                                <a class="btn btn-sm btn-outline-primary w-100 d-flex align-items-center justify-content-center"
+                                   th:href="@{/products/{id}(id=${p.id})}">
+                                    <i class="bi bi-eye me-1"></i> Xem chi tiết
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <nav class="mt-4" th:if="${products.totalPages > 1}">
-                <ul class="pagination justify-content-center">
+
+            <!-- Pagination Promax -->
+            <nav class="mt-5" th:if="${products.totalPages > 1}">
+                <ul class="pagination justify-content-center flex-wrap">
+                    <li class="page-item" th:classappend="${products.first} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/products(keyword=${keyword}, categoryId=${categoryId}, page=${products.number - 1})}"
+                           aria-label="Trang trước">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
                     <li class="page-item" th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}"
                         th:classappend="${i == products.number} ? 'active'">
                         <a class="page-link"
                            th:href="@{/products(keyword=${keyword}, categoryId=${categoryId}, page=${i})}"
                            th:text="${i + 1}"></a>
                     </li>
+                    <li class="page-item" th:classappend="${products.last} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/products(keyword=${keyword}, categoryId=${categoryId}, page=${products.number + 1})}"
+                           aria-label="Trang sau">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </section>
     </div>
 </main>
+
 <footer th:replace="~{fragments/layout :: footer}"></footer>
 </body>
 </html>

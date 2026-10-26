@@ -3,23 +3,88 @@
 <head th:replace="~{fragments/layout :: head(${product.name})}"></head>
 <body>
 <nav th:replace="~{fragments/layout :: navbar}"></nav>
-<main class="container">
+
+<main class="container py-4">
     <div th:replace="~{fragments/layout :: alerts}"></div>
-    <div class="row g-4">
-        <div class="col-md-5">
-            <img class="img-fluid rounded border" th:src="${product.imageUrl}" th:alt="${product.name}">
-        </div>
-        <div class="col-md-7">
-            <small class="text-muted" th:text="${product.category.name}"></small>
-            <h3 th:text="${product.name}"></h3>
-            <h4 class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'COMMA')} + ' ₫'"></h4>
-            <p th:text="${product.description}"></p>
-            <p>Còn lại: <b th:text="${product.quantity}"></b> sản phẩm</p>
-            <!-- Form "Thêm vào giỏ" sẽ bổ sung ở Phần 2 -->
-            <a class="btn btn-link px-0" th:href="@{/products}">← Tiếp tục xem hàng</a>
+    
+    <!-- Breadcrumbs Promax -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small bg-white p-2 px-3 rounded-pill border shadow-sm d-inline-flex mb-0">
+            <li class="breadcrumb-item"><a th:href="@{/}" class="text-decoration-none text-muted"><i class="bi bi-house-door me-1"></i>Trang chủ</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/products(categoryId=${product.category.id})}" class="text-decoration-none text-muted" th:text="${product.category.name}"></a></li>
+            <li class="breadcrumb-item active text-dark fw-bold" aria-current="page" th:text="${product.name}"></li>
+        </ol>
+    </nav>
+
+    <div class="product-detail-card">
+        <div class="row g-5 align-items-center">
+            <!-- Product Image -->
+            <div class="col-lg-5 col-md-6">
+                <div class="detail-img-wrapper">
+                    <img class="img-fluid detail-img rounded"
+                         th:src="${product.imageUrl}"
+                         th:alt="${product.name}"
+                         onerror="this.onerror=null; this.src='https://placehold.co/500x400?text=eShop+Product';">
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-lg-7 col-md-6">
+                <div class="mb-2">
+                    <span class="category-tag" th:text="${product.category.name}"></span>
+                </div>
+                
+                <h2 class="fw-bold text-dark mb-3" th:text="${product.name}"></h2>
+                
+                <div class="d-flex flex-wrap align-items-baseline gap-3 mb-4 pb-3 border-bottom">
+                    <div class="price fs-2" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'COMMA')} + ' ₫'"></div>
+                    <span class="text-muted small">(Đã bao gồm VAT)</span>
+                    
+                    <span th:if="${product.quantity > 5}" class="badge-stock badge-in-stock ms-auto">
+                        <i class="bi bi-check-circle me-1"></i> Còn hàng (<span th:text="${product.quantity}"></span>)
+                    </span>
+                    <span th:if="${product.quantity > 0 and product.quantity <= 5}" class="badge-stock badge-low-stock ms-auto">
+                        <i class="bi bi-exclamation-circle me-1"></i> Sắp hết (chỉ còn <span th:text="${product.quantity}"></span>)
+                    </span>
+                    <span th:if="${product.quantity == 0}" class="badge-stock badge-out-stock ms-auto">
+                        <i class="bi bi-x-circle me-1"></i> Tạm hết hàng
+                    </span>
+                </div>
+                
+                <!-- Mô tả -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase text-muted fw-bold small mb-2">Đặc điểm nổi bật</h6>
+                    <p class="text-secondary lh-lg mb-0" th:text="${product.description}"></p>
+                </div>
+
+                <!-- Ưu đãi kèm theo -->
+                <div class="row g-2 mb-4">
+                    <div class="col-sm-6">
+                        <div class="p-2 border rounded-3 bg-light d-flex align-items-center gap-2 small">
+                            <i class="bi bi-shield-check text-success fs-5"></i>
+                            <span>Bảo hành chính hãng 12 tháng</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-2 border rounded-3 bg-light d-flex align-items-center gap-2 small">
+                            <i class="bi bi-truck text-primary fs-5"></i>
+                            <span>Giao hàng miễn phí toàn quốc</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form "Thêm vào giỏ" sẽ bổ sung ở Phần 2 -->
+                
+                <div class="pt-3 border-top">
+                    <a class="btn btn-outline-secondary d-inline-flex align-items-center" th:href="@{/products}">
+                        <i class="bi bi-arrow-left me-2"></i> Quay lại danh sách sản phẩm
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </main>
+
 <footer th:replace="~{fragments/layout :: footer}"></footer>
 </body>
 </html>

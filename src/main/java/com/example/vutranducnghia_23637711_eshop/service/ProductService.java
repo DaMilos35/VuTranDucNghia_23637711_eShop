@@ -36,11 +36,24 @@ public class ProductService {
     public Product save(Product product, Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new NotFoundException("Không tìm thấy danh mục id = " + categoryId));
+        if (product.getId() != null) {
+            Product existing = findById(product.getId());
+            existing.setName(product.getName());
+            existing.setDescription(product.getDescription());
+            existing.setPrice(product.getPrice());
+            existing.setQuantity(product.getQuantity());
+            existing.setImageUrl(product.getImageUrl());
+            existing.setCategory(category);
+            return productRepository.save(existing);
+        }
         product.setCategory(category);
-        return productRepository.save(product); // id == null -> INSERT, id != null -> UPDATE
+        return productRepository.save(product);
     }
 
     public void delete(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new NotFoundException("Không tìm thấy sản phẩm id = " + id);
+        }
         try {
             productRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
